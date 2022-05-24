@@ -1,0 +1,6 @@
+{
+    "board": "rp2040:rp2040:rpipico",
+    "port": "COM7",
+    "sketch": "system_os\\system_os.ino",
+    "configuration": "flash=2097152_0,freq=133,opt=Small,rtti=Disabled,dbgport=Disabled,dbglvl=None,usbstack=picosdk"
+}
