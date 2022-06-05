@@ -1,44 +1,52 @@
+/*
+ *  coordinate calculation, buttons, backlight
+ */
+
 #pragma once
 #include <Arduino.h>
-
-#define DEF_RES_Y0 2100
-#define DEF_RES_Y1 2100
-#define DEF_RES_X0 2100
-#define DEF_RES_X1 2100
-
-#define CORR_y0 100
-
-#define JOI_0Y 27
-#define JOI_1Y 28
-#define JOI_X0 26
-#define JOI_X1 26
-
-#define H_RES 64
-#define W_RES 128
-
-int yJoi0 = H_RES / 2;
-int yJoi1 = H_RES / 2;
-int xJoi0 = W_RES / 2;
-int xJoi1 = W_RES / 2;
-
-int dataJoiY0{};
-int dataJoiY1{};
-int dataJoiX0{};
-int dataJoiX1{};
 
 class Systems
 {
   private:
+    int DEF_RES_Y0 = 2100;
+    int DEF_RES_Y1 = 2100;
+    int DEF_RES_X0 = 2100;
+    int DEF_RES_X1 = 2100;
+
+    int CORR_y0 = 100;
+
+    int JOI_0Y = 27;
+    int JOI_1Y = 28;
+    int JOI_X0 = 26;
+    int JOI_X1 = 26;
+
+    int H_RES = 64;
+    int W_RES = 128;
+
+    int yJoi0 = H_RES / 2;
+    int yJoi1 = H_RES / 2;
+    int xJoi0 = W_RES / 2;
+    int xJoi1 = W_RES / 2;
+
+    int objUD0y{};
+    int objUD1y{};   
+    int objUD0x{};
+    
+    int dataJoiY0{};
+    int dataJoiY1{};
+    int dataJoiX0{};
+    int dataJoiX1{};
 
   public:
-    //systems sw
+    // systems button / sw0, sw1
     bool sw0()
     {
       if (digitalRead(6) == false)
       {
         return true;
       }
-      else return false;
+      else
+        return false;
     }
 
     bool sw1()
@@ -47,10 +55,11 @@ class Systems
       {
         return true;
       }
-      else return false;
+      else
+        return false;
     }
 
-    //system dADC
+    // system dADC / joi0y, joi1y, joi0x
     int joi0y()
     {
       dataJoiY0 = analogRead(JOI_0Y);
@@ -71,7 +80,8 @@ class Systems
       {
         return yJoi0 = yJoi0 + 2;
       }
-      else return yJoi0;
+      else
+        return yJoi0;
     }
 
     int joi1y()
@@ -94,7 +104,8 @@ class Systems
       {
         return yJoi1 = yJoi1 + 2;
       }
-      else return yJoi1;
+      else
+        return yJoi1;
     }
 
     int joi0x()
@@ -117,11 +128,11 @@ class Systems
       {
         return xJoi0 = xJoi0 - 2;
       }
-      else return xJoi0;
+      else
+        return xJoi0;
     }
 
-
-    //system backlight
+    // system backlight
     void backlight(bool state)
     {
       pinMode(8, OUTPUT);
@@ -134,6 +145,31 @@ class Systems
       {
         digitalWrite(8, 0);
       }
+    }
+
+    // system / obj0y, obj1y, obj0x
+    int obj0y()
+    {
+      dataJoiY0 = analogRead(JOI_0Y);
+
+      if ((dataJoiY0 < (DEF_RES_Y0 - 200)) && (dataJoiY0 > (DEF_RES_Y0 - 1100)))
+      {
+        return objUD0y = objUD0y - 1;
+      }
+      else if (dataJoiY0 < (DEF_RES_Y0 - 1100))
+      {
+        return objUD0y = objUD0y - 1; //2
+      }
+      else if ((dataJoiY0 > (DEF_RES_Y0 + 200)) && (dataJoiY0 < (DEF_RES_Y0 + 1100)))
+      {
+        return objUD0y = objUD0y + 1;
+      }
+      else if (dataJoiY0 > (DEF_RES_Y0 + 1100))
+      {
+        return objUD0y = objUD0y + 1; //2
+      }
+      else
+        return objUD0y = 0;
     }
 };
 

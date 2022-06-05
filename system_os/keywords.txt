@@ -1,6 +1,0 @@
-Systems  KEYWORD1
-
-sw0  KEYWORD1
-sw1  KEYWORD1
-joi0y  KEYWORD2
-backlight  KEYWORD2

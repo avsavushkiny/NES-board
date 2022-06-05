@@ -84,7 +84,7 @@ void setup() // core 0
   u8g2.begin();
   u8g2.setContrast(0);
 
-  //analogReadResolution(12);
+  analogReadResolution(12);
 
   pinMode(JOI0Y, INPUT);
   pinMode(JOI1Y, INPUT);
