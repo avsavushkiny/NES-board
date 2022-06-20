@@ -1,6 +1,6 @@
 /*
- *  graphics output library
- */
+    graphics output library
+*/
 
 #pragma once
 #include <Arduino.h>
@@ -38,11 +38,11 @@ class Gfx
       } while ( millis() < time );
     }
 
-    void renderMessage( void (*draw_fn)(String, String),
-                        String a, String b )
+    void renderMessageBottom( void (*draw_fn)(String, String),
+                              String a, String b, int timeDelay )
     {
       uint32_t time;
-      time = millis() + 10;
+      time = millis() + timeDelay;
 
       do {
         u8g2.clearBuffer();
@@ -66,13 +66,13 @@ class Gfx
 
 Gfx gfx;
 
-void messageHelloCat(String text1, String text2, String text3, String text4)
+void catMessage(String text1, String text2, String text3, String text4)
 {
   u8g2.drawXBMP(2, 3, diaFrameHello_w, diaFrameHello_h, diaFrameHello);
   u8g2.drawXBMP(105, 45, nes_cat_w, nes_cat_h, nes_cat);
   u8g2.drawHLine(102, 59, 21);
 
-  u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.setFont(u8g2_font_6x10_tr); //u8g2_font_6x10_tr
   u8g2.setCursor(9, 14);
   u8g2.print(text1);
   u8g2.setCursor(9, 24);
@@ -143,4 +143,16 @@ void messageTwo(int8_t x, int8_t y, String text1, String text2)
   u8g2.setFont(u8g2_font_6x10_tr);
   u8g2.setCursor(x, y);
   u8g2.print((String)text1 + (String)text2);
+}
+
+void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
+{
+  if (ver == true)
+  {
+
+  }
+  else
+  {
+    u8g2.drawXBMP(x, y, beta_w, beta_h, beta);
+  }
 }

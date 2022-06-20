@@ -1,5 +1,5 @@
 /*
- *  start screen
+ *  start screen page
  */
 
 #include <Arduino.h>

@@ -1,13 +1,15 @@
 /*
-    NES OS v1 / beta 05/06/22
-    21/05/22
+    NES OS / beta 1 200622
+             pack 1 0622
 
     fonts https://github.com/olikraus/u8g2/wiki/fntlistall
 */
 #include <Arduino.h>
 #include "system.h"
 #include "system_gfx_st7565.h"
+#include "pgs_0.h"
 #include "pgs_1.h"
+#include "pgs_4.h"
 #include "pgs_nes.h"
 #include "system_map_sound.h"
 #include "system_list.h"
@@ -40,15 +42,9 @@ void loop()
   }
   else pgs = pgs;
 
-  Serial.println(pgs);
-
   if (pgs == 0)
   {
-    gfx.renderCatMessage(messageHelloCat,
-                         "Hello!",
-                         "I am NES console,",
-                         "how are you?",
-                         "press start");
+    renderPgs0();
   }
 
   else if (pgs == 1)
@@ -56,10 +52,28 @@ void loop()
     renderPgs1();
   }
 
+  /*
+  else if (pgs == 2)
+  {
+    renderPgs4();
+    delay(3000);
+    pgs = 0;
+  }
+
+  else if (pgs == 3)
+  {
+    renderPgs3();
+  }
+
+  else if (pgs == 4)
+  {
+    renderPgs4();
+  }
+  */
   else
   {
-    gfx.renderMessage(messageBottom, "!!!", "Page not found");
-    delay(3000);
+    //gfx.renderMessageBottom(messageBottom, "!!!", "Page not found", 10);
+    delay(500);
     pgs = 0;
   }
 
