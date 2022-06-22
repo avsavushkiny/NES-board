@@ -37,7 +37,7 @@ class Gfx
         u8g2.sendBuffer();
       } while ( millis() < time );
     }
-
+    /*
     void renderMessageBottom( void (*draw_fn)(String, String),
                               String a, String b, int timeDelay )
     {
@@ -50,7 +50,7 @@ class Gfx
         u8g2.sendBuffer();
       } while ( millis() < time );
     }
-
+    */
     void renderPage( void (*draw_fn)(void), int timeDelay )
     {
       uint32_t time;
@@ -92,13 +92,24 @@ void catMessage(String text1, String text2, String text3, String text4)
   }
 }
 
-void messageBottom(String text1, String text2)
-{
+/*
+  void messageBottom(String text1, String text2)
+  {
   u8g2.drawFrame(0, 39, 128, 2);
   u8g2.setFont(u8g2_font_6x10_tr);
   u8g2.setCursor(3, 50);
   u8g2.print(text1);
   u8g2.setCursor(3, 60);
+  u8g2.print(text2);
+  }
+*/
+
+void messageBottom(String text1, String text2)
+{
+  u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.setCursor(16, 35);
+  u8g2.print(text1);
+  u8g2.setCursor(16, 45);
   u8g2.print(text2);
 }
 
@@ -113,7 +124,7 @@ bool drawCursor(bool stateCursor)
   }
   else return false;
 }
-
+/*
 void messageDiaFrameBottom(String text1, String text2, String text3)
 {
   u8g2.drawXBMP(0, 32, diaFrameBottom_w, diaFrameBottom_h, diaFrameBottom);
@@ -137,7 +148,7 @@ void messageDiaFrameBottom(String text1, String text2, String text3)
     u8g2.print(text3);
   }
 }
-
+*/
 void messageTwo(int8_t x, int8_t y, String text1, String text2)
 {
   u8g2.setFont(u8g2_font_6x10_tr);
@@ -154,5 +165,51 @@ void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
   else
   {
     u8g2.drawXBMP(x, y, beta_w, beta_h, beta);
+  }
+}
+/*
+void messagePgsM(String title1, String title2, String info, String text3)
+{
+  u8g2.drawFrame(4, -1, 50, 66);
+  u8g2.drawFrame(-1, 7, 130, 50);
+
+  u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.setCursor(58, 30);
+  u8g2.print(title1);
+  u8g2.setCursor(58, 40);
+  u8g2.print(title2);
+  u8g2.setCursor(58, 50);
+  u8g2.print(info);
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval)
+  {
+    previousMillis = currentMillis;
+  }
+  else
+  {
+    u8g2.setCursor(100, 20);
+    u8g2.print(text3);
+  }
+}
+*/
+
+void messagePgs2(String title1, String title2, String play)
+{
+  u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.setCursor(58, 30);
+  u8g2.print(title1);
+  u8g2.setCursor(58, 40);
+  u8g2.print(title2);
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval)
+  {
+    previousMillis = currentMillis;
+  }
+  else
+  {
+    u8g2.setCursor(100, 20);
+    u8g2.print(play);
   }
 }

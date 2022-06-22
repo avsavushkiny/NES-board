@@ -10,6 +10,7 @@
 #include "pgs_0.h"
 #include "pgs_1.h"
 #include "pgs_4.h"
+#include "pgs_m.h"
 #include "pgs_nes.h"
 #include "system_map_sound.h"
 #include "system_list.h"
@@ -49,7 +50,7 @@ void loop()
 
   else if (pgs == 1)
   {
-    renderPgs1();
+    renderPgsM();
   }
 
   /*
@@ -72,8 +73,8 @@ void loop()
   */
   else
   {
-    //gfx.renderMessageBottom(messageBottom, "!!!", "Page not found", 10);
-    delay(500);
+    gfx.renderMessageBottom(messageBottom, "! Return to menu", "", 10);
+    delay(2000);
     pgs = 0;
   }
 
