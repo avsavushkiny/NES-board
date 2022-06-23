@@ -37,7 +37,7 @@ class Gfx
         u8g2.sendBuffer();
       } while ( millis() < time );
     }
-    /*
+
     void renderMessageBottom( void (*draw_fn)(String, String),
                               String a, String b, int timeDelay )
     {
@@ -50,7 +50,7 @@ class Gfx
         u8g2.sendBuffer();
       } while ( millis() < time );
     }
-    */
+
     void renderPage( void (*draw_fn)(void), int timeDelay )
     {
       uint32_t time;
@@ -91,7 +91,6 @@ void catMessage(String text1, String text2, String text3, String text4)
     u8g2.print(text4);
   }
 }
-
 /*
   void messageBottom(String text1, String text2)
   {
@@ -103,7 +102,6 @@ void catMessage(String text1, String text2, String text3, String text4)
   u8g2.print(text2);
   }
 */
-
 void messageBottom(String text1, String text2)
 {
   u8g2.setFont(u8g2_font_6x10_tr);
@@ -125,8 +123,8 @@ bool drawCursor(bool stateCursor)
   else return false;
 }
 /*
-void messageDiaFrameBottom(String text1, String text2, String text3)
-{
+  void messageDiaFrameBottom(String text1, String text2, String text3)
+  {
   u8g2.drawXBMP(0, 32, diaFrameBottom_w, diaFrameBottom_h, diaFrameBottom);
   //u8g2.drawXBMP(105, 45, nes_cat_w, nes_cat_h, nes_cat);
   //u8g2.drawHLine(102, 59, 21);
@@ -147,17 +145,18 @@ void messageDiaFrameBottom(String text1, String text2, String text3)
     u8g2.setCursor(99, 49); //99px49px "next"
     u8g2.print(text3);
   }
-}
+  }
 */
 void messageTwo(int8_t x, int8_t y, String text1, String text2)
 {
-  u8g2.setFont(u8g2_font_6x10_tr);
+  //u8g2.setFont(u8g2_font_6x10_tr);
+  u8g2.setFont(u8g2_font_5x7_tn);
   u8g2.setCursor(x, y);
   u8g2.print((String)text1 + (String)text2);
 }
-
-void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
-{
+/*
+  void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
+  {
   if (ver == true)
   {
 
@@ -166,10 +165,11 @@ void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
   {
     u8g2.drawXBMP(x, y, beta_w, beta_h, beta);
   }
-}
+  }
+*/
 /*
-void messagePgsM(String title1, String title2, String info, String text3)
-{
+  void messagePgsM(String title1, String title2, String info, String text3)
+  {
   u8g2.drawFrame(4, -1, 50, 66);
   u8g2.drawFrame(-1, 7, 130, 50);
 
@@ -191,25 +191,29 @@ void messagePgsM(String title1, String title2, String info, String text3)
     u8g2.setCursor(100, 20);
     u8g2.print(text3);
   }
-}
+  }
 */
 
 void messagePgs2(String title1, String title2, String play)
 {
   u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.setCursor(58, 30);
+  u8g2.setCursor(63, 22); //60,24
   u8g2.print(title1);
-  u8g2.setCursor(58, 40);
+  u8g2.setCursor(63, 32); //60,34
   u8g2.print(title2);
 
   unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval)
+  if (currentMillis - previousMillis >= interval + 200)
   {
     previousMillis = currentMillis;
+
+    //u8g2.setCursor(107, 51);
+    //u8g2.print(play);
   }
   else
   {
-    u8g2.setCursor(100, 20);
-    u8g2.print(play);
+    u8g2.drawXBMP(100, 55, play_w, play_h, play_bits);    //23x7
+    //u8g2.setCursor(105, 51);
+    //u8g2.print(play);
   }
 }

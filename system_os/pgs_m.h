@@ -1,7 +1,7 @@
 /*
  *  game MENU page
  */
- 
+/* 
 #pragma once
 #include <Arduino.h>
 #include <U8g2lib.h>
@@ -9,7 +9,7 @@
 #include "system_gfx_st7565.h"
 #include "system_list.h"
 #include "sys_image48.h"
-/*
+
 void drawPgsM();
 
 int8_t item{};

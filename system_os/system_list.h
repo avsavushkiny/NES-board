@@ -35,10 +35,10 @@ struct Object
   const uint8_t* icon;
 } obj[]
 {
-  {"Acey Ducey", "Original", "Palmby'73", acdu_bits},
+  {"Acey", "Ducey", "Palmby'73", acdu_bits},
   {"Aliens", "Invaders", "Atari'78", ai_bits},
   {"Dice", "Original", "Harrison'74", dice_bits},
-  {"Jocker &", "Dice", "Basic'73", jdice_bits},
+  {"Jocker", "& Dice", "Basic'73", jdice_bits},
   {"Pong", "(NES ver)", "Atari'72", pong_bits},
   {"Snake", "Original", "Nokia'97", snake_bits},
   {"Tetris", "Original", "Pajitnov'84", tetris_bits},
@@ -55,6 +55,6 @@ struct ObjectCatMessage
   {"Hello!", "I am NES console", "how are you?",             "press start"},
   {"To start the game", "click on the ", "button Joystick!", "press start"},
   {"Faster click", "and play!", "Go! Go! Go!",               "press start"},
-  {"I work on NES OS,", "ver 1 200622 beta", "game pack 1 22",    "press start"},
+  {"I work on NES OS,", "ver 6.22 beta", "game pack 1.22",    "press start"},
   {"Designer", "and programmer", "avsavushkiny GHub",        "press start"},
 };

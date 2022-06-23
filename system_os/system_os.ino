@@ -1,5 +1,5 @@
 /*
-    NES OS / beta 1 200622
+    NES OS / beta 1 230622
              pack 1 0622
 
     fonts https://github.com/olikraus/u8g2/wiki/fntlistall
@@ -9,7 +9,8 @@
 #include "system_gfx_st7565.h"
 #include "pgs_0.h"
 #include "pgs_1.h"
-#include "pgs_4.h"
+#include "pgs_2.h"
+#include "pgs_3.h"
 #include "pgs_m.h"
 #include "pgs_nes.h"
 #include "system_map_sound.h"
@@ -50,7 +51,7 @@ void loop()
 
   else if (pgs == 1)
   {
-    renderPgsM();
+    renderPgs3();
   }
 
   /*

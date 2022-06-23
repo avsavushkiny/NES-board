@@ -1,7 +1,7 @@
 /*
  *  info page
  */
-
+/*
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <SPI.h>
@@ -30,4 +30,4 @@ void drawPgs4()
   messageTwo(0, 40, "", "");
   messageTwo(0, 50, "@avsavushkiny", "");
   messageTwo(0, 60, "github / 2022", "");
-}
+}*/
