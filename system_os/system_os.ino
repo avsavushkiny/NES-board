@@ -8,6 +8,7 @@
 #include "system.h"
 #include "sys_gfx_st7565.h"
 #include "pgs_0.h"
+#include "pgs_screensaver.h"
 #include "pgs_game_menu.h"
 #include "pgs_nes.h"
 #include "sys_map_sound.h"
@@ -51,14 +52,12 @@ void loop()
     renderPgsGameMenu();
   }
 
-  /*
+  
   else if (pgs == 2)
   {
-    renderPgs4();
-    delay(3000);
-    pgs = 0;
+    renderPgsScreenSaver();
   }
-
+  /*
   else if (pgs == 3)
   {
     renderPgs3();
