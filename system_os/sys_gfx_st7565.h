@@ -7,7 +7,7 @@
 #include <U8g2lib.h>
 #include <SPI.h>
 #include "system.h"
-#include "system_map_xbmp.h"
+#include "sys_map_xbmp.h"
 
 U8G2_ST7565_ERC12864_F_4W_SW_SPI u8g2(U8G2_R0, 18, 19, 17, 16, 20);
 
@@ -91,17 +91,7 @@ void catMessage(String text1, String text2, String text3, String text4)
     u8g2.print(text4);
   }
 }
-/*
-  void messageBottom(String text1, String text2)
-  {
-  u8g2.drawFrame(0, 39, 128, 2);
-  u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.setCursor(3, 50);
-  u8g2.print(text1);
-  u8g2.setCursor(3, 60);
-  u8g2.print(text2);
-  }
-*/
+
 void messageBottom(String text1, String text2)
 {
   u8g2.setFont(u8g2_font_6x10_tr);
@@ -122,31 +112,7 @@ bool drawCursor(bool stateCursor)
   }
   else return false;
 }
-/*
-  void messageDiaFrameBottom(String text1, String text2, String text3)
-  {
-  u8g2.drawXBMP(0, 32, diaFrameBottom_w, diaFrameBottom_h, diaFrameBottom);
-  //u8g2.drawXBMP(105, 45, nes_cat_w, nes_cat_h, nes_cat);
-  //u8g2.drawHLine(102, 59, 21);
 
-  u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.setCursor(5, 49);
-  u8g2.print(text1);
-  u8g2.setCursor(5, 59);
-  u8g2.print(text2);
-
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval)
-  {
-    previousMillis = currentMillis;
-  }
-  else
-  {
-    u8g2.setCursor(99, 49); //99px49px "next"
-    u8g2.print(text3);
-  }
-  }
-*/
 void messageTwo(int8_t x, int8_t y, String text1, String text2)
 {
   //u8g2.setFont(u8g2_font_6x10_tr);
@@ -154,47 +120,8 @@ void messageTwo(int8_t x, int8_t y, String text1, String text2)
   u8g2.setCursor(x, y);
   u8g2.print((String)text1 + (String)text2);
 }
-/*
-  void drawVersion(int8_t x, int8_t y, bool ver) //false - beta, true - alpha
-  {
-  if (ver == true)
-  {
 
-  }
-  else
-  {
-    u8g2.drawXBMP(x, y, beta_w, beta_h, beta);
-  }
-  }
-*/
-/*
-  void messagePgsM(String title1, String title2, String info, String text3)
-  {
-  u8g2.drawFrame(4, -1, 50, 66);
-  u8g2.drawFrame(-1, 7, 130, 50);
-
-  u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.setCursor(58, 30);
-  u8g2.print(title1);
-  u8g2.setCursor(58, 40);
-  u8g2.print(title2);
-  u8g2.setCursor(58, 50);
-  u8g2.print(info);
-
-  unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval)
-  {
-    previousMillis = currentMillis;
-  }
-  else
-  {
-    u8g2.setCursor(100, 20);
-    u8g2.print(text3);
-  }
-  }
-*/
-
-void messagePgs2(String title1, String title2, String play)
+void messagePgsGameMenu(String title1, String title2, String title3)
 {
   u8g2.setFont(u8g2_font_6x10_tr);
   u8g2.setCursor(63, 22); //60,24
@@ -206,14 +133,9 @@ void messagePgs2(String title1, String title2, String play)
   if (currentMillis - previousMillis >= interval + 200)
   {
     previousMillis = currentMillis;
-
-    //u8g2.setCursor(107, 51);
-    //u8g2.print(play);
   }
   else
   {
     u8g2.drawXBMP(100, 55, play_w, play_h, play_bits);    //23x7
-    //u8g2.setCursor(105, 51);
-    //u8g2.print(play);
   }
 }

@@ -5,15 +5,15 @@
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <SPI.h>
-#include "system_gfx_st7565.h"
-#include "system_map_xbmp.h"
-#include "system_map_sound.h"
+#include "sys_gfx_st7565.h"
+#include "sys_map_xbmp.h"
+#include "sys_map_sound.h"
 
 void logoNes();
 
 void drawPgsNes()
 {
-  gfx.renderPage(logoNes, 2000);
+  gfx.renderPage(logoNes, 1500);
 }
 
 void logoNes()

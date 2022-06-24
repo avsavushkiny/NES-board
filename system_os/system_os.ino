@@ -1,20 +1,17 @@
 /*
-    NES OS / beta 1 230622
-             pack 1 0622
+    NES OS / beta 1
+             pack 1
 
     fonts https://github.com/olikraus/u8g2/wiki/fntlistall
 */
 #include <Arduino.h>
 #include "system.h"
-#include "system_gfx_st7565.h"
+#include "sys_gfx_st7565.h"
 #include "pgs_0.h"
-#include "pgs_1.h"
-#include "pgs_2.h"
-#include "pgs_3.h"
-#include "pgs_m.h"
+#include "pgs_game_menu.h"
 #include "pgs_nes.h"
-#include "system_map_sound.h"
-#include "system_list.h"
+#include "sys_map_sound.h"
+#include "sys_list.h"
 
 int pgs{0};
 
@@ -51,7 +48,7 @@ void loop()
 
   else if (pgs == 1)
   {
-    renderPgs3();
+    renderPgsGameMenu();
   }
 
   /*
@@ -75,7 +72,7 @@ void loop()
   else
   {
     gfx.renderMessageBottom(messageBottom, "! Return to menu", "", 10);
-    delay(2000);
+    delay(1500);
     pgs = 0;
   }
 

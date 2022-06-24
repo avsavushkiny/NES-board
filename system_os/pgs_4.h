@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <SPI.h>
-#include "system_gfx_st7565.h"
+#include "sys_gfx_st7565.h"
 
 void drawPgs4();
 
