@@ -9,6 +9,10 @@
 #include "system.h"
 #include "sys_map_xbmp.h"
 
+#define WIDTH 128
+#define HEIGHT 64
+#define CTRL_TO 50
+
 U8G2_ST7565_ERC12864_F_4W_SW_SPI u8g2(U8G2_R0, 18, 19, 17, 16, 20);
 
 unsigned long previousMillis = 0;
@@ -62,6 +66,25 @@ class Gfx
         u8g2.sendBuffer();
       } while ( millis() < time );
     }
+
+    void renderMessageStartscreen(String title1, String title2, int timeDelay)
+    {
+      uint32_t time;
+      time = millis() + timeDelay;
+
+      do {
+        u8g2.clearBuffer();
+        
+        u8g2.setFont(u8g2_font_6x10_tr);
+        u8g2.clearBuffer();
+        u8g2.setCursor(10, 29); u8g2.print(title1);
+        u8g2.setCursor(10, 39); u8g2.print(title2);
+
+        u8g2.sendBuffer();
+      } while ( millis() < time );
+
+      delay(1500);
+    }
 };
 
 Gfx gfx;
@@ -108,6 +131,22 @@ bool drawCursor(bool stateCursor)
     u8g2.setDrawColor(2);
     u8g2.setBitmapMode(1);
     u8g2.drawXBMP(sys.joi0x(), sys.joi0y(), cursorOne_w, cursorOne_h, cursorOne);
+    u8g2.setDrawColor(1);
+    u8g2.setBitmapMode(0);
+    return true;
+  }
+  else return false;
+}
+
+bool drawCursorTwo(bool stateCursor)
+{
+  if (stateCursor == true)
+  {
+    u8g2.setDrawColor(2);
+    u8g2.setBitmapMode(1);
+    u8g2.drawXBMP(sys.joi0x(), sys.joi0y(), cursorTwo_w, cursorTwo_h, cursorTwo);
+    u8g2.setDrawColor(1);
+    u8g2.setBitmapMode(0);
     return true;
   }
   else return false;
@@ -116,7 +155,7 @@ bool drawCursor(bool stateCursor)
 void messageTwo(int8_t x, int8_t y, String text1, String text2)
 {
   //u8g2.setFont(u8g2_font_6x10_tr);
-  u8g2.setFont(u8g2_font_5x7_tn);
+  u8g2.setFont(u8g2_font_5x7_tr);
   u8g2.setCursor(x, y);
   u8g2.print((String)text1 + (String)text2);
 }

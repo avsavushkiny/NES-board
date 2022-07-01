@@ -1,53 +1,88 @@
 /*
-    info page
+    screensaver page
 */
 
-#pragma once
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <SPI.h>
 #include "system.h"
 #include "sys_gfx_st7565.h"
 #include "sys_map_xbmp.h"
+#include "sys_list.h"
 
-void drawScreenSaver();
-void timer();
+void drawPgsScreenSaver();
+void calcPgsScreenSaver();
+void messageScreenSaver();
+void calcRandomLogo();
 
-unsigned long previousMillis2 = 0;
-const long interval2 = 3000;
-
-int rndX{};
-int rndY{};
+int8_t x{};
+int8_t y{};
+int periodScreen = 3000;
+unsigned long timeNow = 0;
+int timeBacklight{};
 
 void renderPgsScreenSaver()
 {
+  calcPgsScreenSaver();
+
   uint32_t time;
   time = millis() + 10;
-
   do {
     u8g2.clearBuffer();
-    timer();
+    drawPgsScreenSaver();
     u8g2.sendBuffer();
   } while ( millis() < time );
 }
 
-void drawScreenSaver()
+void calcPgsScreenSaver()
 {
-  rndX = random(0, 68);
-  rndY = random(10, 64);
+  if (millis() >= timeNow + periodScreen)
+  {
+    timeNow += periodScreen;
 
-  messageTwo(rndX, rndY, "Screen saver", "");
+    if (stateConsole == CONSOLE_SCREEN_SAVER)
+    {
+      calcRandomLogo();
+      timeBacklight++;
+    }
+    else
+    {
+      timeNow = millis(); timeBacklight = 0;
+    }
+  }
+
+  if (timeBacklight >= 5)
+  {
+    sys.backlight(false);
+
+    if (sys.obj0y() > 0)
+    {
+      sys.backlight(true);
+      delay(250);
+      timeBacklight = 0;
+    }
+  }
+  else sys.backlight(true);
+
+  if (timeBacklight == 10)
+  {
+    timeBacklight = 5;
+  }
 }
 
-void timer()
+void calcRandomLogo()
 {
-  unsigned long currentMillis2 = millis();
-  if (currentMillis2 - previousMillis2 >= interval2)
-  {
-    previousMillis2 = currentMillis2;
-  }
-  else
-  {
-    drawScreenSaver();
-  }
+  x = random(0, 54);
+  y = random(0, 46);
+}
+
+void drawPgsScreenSaver()
+{
+  u8g2.drawXBMP(x, y, nes_logo_w, nes_logo_h, nes_logo);
+}
+
+void messageScreenSaver()
+{
+  messageTwo(5, 39, "Power save mode", "");
+  messageTwo(5, 49, "Press the button to exit", "");
 }

@@ -9,17 +9,27 @@
 #include "sys_gfx_st7565.h"
 #include "sys_list.h"
 #include "sys_image48.h"
+#include "pgs_pck1_testFps.h"
+#include "pgs_pck1_testAdc.h"
+#include "pgs_pck1_sapper.h"
+#include "pgs_pck1_ai.h"
 
 void drawPgsGameMenu();
 void randomPcCat();
+void selectionProgramm();
+void interrupt();
 
 int8_t item{};
+int pgs{0};
+int timeTimer = 0;
 
 int8_t randX[20];
 int8_t randY[20];
 
 void renderPgsGameMenu()
 {
+  sys.backlight(true);
+
   uint32_t time;
   time = millis() + 10;
 
@@ -34,12 +44,12 @@ void drawPgsGameMenu()
 {
   if (sys.obj0y() > 0)
   {
-    item++;
+    item++; timeTimer = 0;
     delay(250);
   }
   else if (sys.obj0y() < 0)
   {
-    item--;
+    item--; timeTimer = 0;
     delay(250);
   }
   else item = item;
@@ -54,19 +64,19 @@ void drawPgsGameMenu()
     item = OBJ_MAX_SIZE - 1;
   }
   /*
-  for (int a = 0; a < 128; a += 8)
-  {
+    for (int a = 0; a < 128; a += 8)
+    {
     for (int b = 0; b < 56; b += 8)
     {
       u8g2.drawPixel(a, b);
     }
-  }
+    }
   */
   for (int a = 0; a < 128; a += 8)
   {
     u8g2.drawXBMP(a, 53, wall2_w, wall2_h, wall2_bits);    //8x11
   }
-  
+
   u8g2.drawHLine(0, 0, 128);   //top
 
   u8g2.setBitmapMode(1);
@@ -86,6 +96,8 @@ void drawPgsGameMenu()
 
   drawCursor(false);
   u8g2.drawXBMP(6, 8, 48, 48, obj[item].icon);
+
+  selectionProgramm();
 }
 
 void randomPcCat()
@@ -99,5 +111,84 @@ void randomPcCat()
   for (int a = 0; a < 20; a++)
   {
     u8g2.drawPixel(randX[a], randY[a]);
+  }
+}
+
+void selectionProgramm()
+{
+  //102 Aliens Invaders
+  if ((obj[item].numObj == 102) && (sys.sw1() == true))
+  {
+    gfx.renderMessageStartscreen("Game", "Aliens Invaders", 10);
+
+    for (;;)
+    {
+      renderPgsAi();
+
+      if (sys.iSw() == true)
+      {
+        delay(250);
+        break;
+      }
+    }
+  }
+
+  //108 Sapper
+  if ((obj[item].numObj == 108) && (sys.sw1() == true))
+  {
+    gfx.renderMessageStartscreen("Game", "Sapper (NES ver)", 10);
+
+    for (;;)
+    {
+      renderPgsSapper();
+      if (sys.iSw() == true)
+      {
+        delay(250);
+        break;
+      }
+    }
+  }
+
+  //200
+  if ((obj[item].numObj == 200) && (sys.sw1() == true))
+  {
+    gfx.renderMessageStartscreen("Systems", "Test FPS", 10);
+
+    for (;;)
+    {
+      renderPgsTestFPS();  
+      if (sys.iSw() == true)
+      {
+        delay(250);
+        break;
+      }
+      break;
+    }
+  }
+
+  //201
+  if ((obj[item].numObj == 201) && (sys.sw1() == true))
+  {
+    gfx.renderMessageStartscreen("Systems", "Test ADC", 10);
+
+    for (;;)
+    {
+      renderPgsTestAdc();
+      if (sys.iSw() == true)
+      {
+        delay(250);
+        break;
+      }
+    }
+  }
+}
+
+void interrupt()
+{
+  if (sys.iSw() == true)
+  {
+    delay(250);
+    pgs = 1;
+    renderPgsGameMenu();
   }
 }

@@ -1,6 +1,6 @@
 /*
- *  coordinate calculation, buttons, backlight
- */
+    coordinate calculation, buttons, backlight
+*/
 
 #pragma once
 #include <Arduino.h>
@@ -29,9 +29,9 @@ class Systems
     int xJoi1 = W_RES / 2;
 
     int objUD0y{};
-    int objUD1y{};   
+    int objUD1y{};
     int objUD0x{};
-    
+
     int dataJoiY0{};
     int dataJoiY1{};
     int dataJoiX0{};
@@ -45,8 +45,7 @@ class Systems
       {
         return true;
       }
-      else
-        return false;
+      else return false;
     }
 
     bool sw1()
@@ -55,8 +54,21 @@ class Systems
       {
         return true;
       }
-      else
-        return false;
+      else return false;
+    }
+
+    //interrupts
+    bool iSw()
+    {
+      if (digitalRead(7) == false)
+      {
+        if ((digitalRead(6) == false) && (digitalRead(7) == false))
+        {
+          return true;
+        }
+        else return false;
+      }
+      else return false;
     }
 
     // system dADC / joi0y, joi1y, joi0x
@@ -174,3 +186,8 @@ class Systems
 };
 
 Systems sys;
+
+void debug(String text)
+{
+  Serial.println(text);
+}

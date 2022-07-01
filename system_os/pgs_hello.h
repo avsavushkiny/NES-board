@@ -9,23 +9,25 @@
 #include "sys_gfx_st7565.h"
 #include "sys_list.h"
 
-void drawPgs0();
+void drawPgsHello();
 
 int8_t iitem{};
 
-void renderPgs0()
+void renderPgsHello()
 {
+  sys.backlight(true);
+  
   uint32_t time;
   time = millis() + 10;
 
   do {
     u8g2.clearBuffer();
-    drawPgs0();
+    drawPgsHello();
     u8g2.sendBuffer();
   } while ( millis() < time );
 }
 
-void drawPgs0()
+void drawPgsHello()
 {
   if (sys.obj0y() > 0)
   {
