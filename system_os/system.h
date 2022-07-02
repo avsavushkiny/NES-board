@@ -183,6 +183,30 @@ class Systems
       else
         return objUD0y = 0;
     }
+
+    int obj1y()
+    {
+      dataJoiY1 = analogRead(JOI_1Y);
+
+      if ((dataJoiY1 < (DEF_RES_Y1 - 200)) && (dataJoiY1 > (DEF_RES_Y1 - 1100)))
+      {
+        return objUD1y = objUD1y - 1;
+      }
+      else if (dataJoiY1 < (DEF_RES_Y1 - 1100))
+      {
+        return objUD1y = objUD1y - 1; //2
+      }
+      else if ((dataJoiY1 > (DEF_RES_Y1 + 200)) && (dataJoiY1 < (DEF_RES_Y1 + 1100)))
+      {
+        return objUD1y = objUD1y + 1;
+      }
+      else if (dataJoiY1 > (DEF_RES_Y1 + 1100))
+      {
+        return objUD1y = objUD1y + 1; //2
+      }
+      else
+        return objUD1y = 0;
+    }
 };
 
 Systems sys;

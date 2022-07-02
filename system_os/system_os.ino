@@ -56,13 +56,13 @@ void loop()
     renderPgsGameMenu();
   }
 
-
+  /*
   else if (pgs == 2)
   {
     stateConsole = CONSOLE_SCREEN_SAVER;
     renderPgsScreenSaver();
   }
-  /*
+  
     else if (pgs == 3)
     {
     renderPgs3();
