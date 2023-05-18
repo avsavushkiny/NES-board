@@ -17,7 +17,7 @@
 void drawPgsGameMenu();
 void randomPcCat();
 void selectionProgramm();
-void interrupt();
+void interrupt(); void drawPgsGameMenu();
 
 int8_t item{};
 int pgs{0};
@@ -123,7 +123,7 @@ void selectionProgramm()
 
     for (;;)
     {
-      renderPgsAi();
+      //renderPgsAi();
 
       if (sys.iSw() == true)
       {
